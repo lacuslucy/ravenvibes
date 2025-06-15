@@ -1,0 +1,23 @@
+{
+  "name": "ravenvibes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lacuslucy/ravenvibes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lacuslucy/ravenvibes/issues"
+  },
+  "homepage": "https://github.com/lacuslucy/ravenvibes#readme",
+  "dependencies": {
+    "@strudel/web": "^1.2.3"
+  }
+}

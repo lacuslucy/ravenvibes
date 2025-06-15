@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Can't Stop - Strudel Music</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: #f0f0f0;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #stop {
+        background-color: #f44336;
+      }
+      #stop:hover {
+        background-color: #da190b;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Can't Stop - Strudel Music</h1>
+    <p>Click to play a simplified version of "Can't Stop" by Red Hot Chili Peppers, or Stop to silence.</p>
+    <button id="playCantStop">Play Can't Stop</button>
+    <button id="stop">Stop</button>
+
+    <script src="./node_modules/@strudel/web/dist/index.js"></script>
+    <script>
+      // Log to confirm script loading
+      console.log('Strudel script loaded:', typeof note !== 'undefined');
+
+      // Initialize Strudel
+      initStrudel();
+
+      // Get buttons
+      const playCantStopButton = document.getElementById('playCantStop');
+      const stopButton = document.getElementById('stop');
+
+      // Play "Can’t Stop" pattern: Guitar riff, drums, and bassline
+      playCantStopButton.addEventListener('click', async () => {
+        console.log('Playing Can\'t Stop');
+        try {
+          await samples('github:tidalcycles/dirt-samples');
+          stack(
+            // Guitar riff (E minor: E, G, A, B, D)
+            note("<e4*2 [~ g4] a4 [~ b4] d4 [~ g4] a4 [~ b4]>(3,8)")
+              .s('triangle')
+              .gain(0.5)
+              .cutoff(1200)
+              .pan(sine.slow(4)),
+
+            // Drum pattern: Funky groove
+            s("<bd bd bd ~> <sd ~ sd ~>")
+              .gain(0.7)
+              .stack(s("hh*8").gain(0.4)),
+
+            // Bassline: Syncopated, following root notes
+            note("<e2*2 [~ e2] a2 [~ a2] d2 [~ d2] g2 [~ g2]>(3,8)")
+              .s('sawtooth')
+              .gain(0.3)
+              .cutoff(sine.slow(5).range(300, 800))
+              .resonance(5)
+          ).slow(1.2)
+          .play();
+        } catch (error) {
+          console.error('Error playing pattern:', error);
+        }
+      });
+
+      // Stop all sounds
+      stopButton.addEventListener('click', () => {
+        console.log('Stop button clicked');
+        hush();
+      });
+    </script>
+  </body>
+</html>
